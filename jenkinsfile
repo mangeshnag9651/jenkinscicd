@@ -1,11 +1,17 @@
 pipeline{
   agent any
-
-  stages {
-
-    stage('stage-1') {
-
-        steps('this is y first commit')
+  environment{
+      staging_server="3.95.214.25"
+   }
+   
+   stages{
+       stage{'Deploy to Remote'}{
+           steps{
+               sh 'scp -r ${WORKSPACE}/* root@${staging_server}:/var/www/html/mangeshnag9651/'
+            }
+        }
     }
-  }
-}
+  }  
+  
+
+  
